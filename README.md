@@ -67,6 +67,22 @@ module Headers::Stream
 end
 ```
 
+## Client side js (coffee)
+It's just simply EventSource listener for one of urls (buggy or fixed) to show you how to handle stream.
+```coffee
+$ ->
+  console.log "initializing stream"
+  # for buggy version use:
+  url = 'http://localhost:3000/stream_buggy'
+  # for fixed version use:
+  # url = 'http://localhost:3000/stream_fixed'
+  source = new EventSource(url)
+  source.addEventListener "messages.create", (e) ->
+    # .. your js code here ;)
+    alert "message received!"
+    console.log e
+```
+
 ## First - stream controller (with bug)
 In my first controller I will show you basic functionality with Redis Pub/Sub. And if you will run it in your machine / app you will see:
 - App will run but stream threads will not die after client disconnection;
